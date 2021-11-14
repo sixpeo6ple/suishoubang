@@ -1,0 +1,16 @@
+server:
+  port: 2333 # https\u534F\u8BAE
+#  http-port: 8080 # http\u534F\u8BAE
+  ssl:
+    enabled: true
+    key-store: classpath:wx.whiterunner.cloud.jks
+    key-store-type: JKS
+#    key-alias: whiterunner.cloud
+    key-store-password: rsAC9Q4p
+    key-password: rsAC9Q4p
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
