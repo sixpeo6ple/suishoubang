@@ -1,0 +1,25 @@
+
+.top{
+	height: 25px;
+	width: 100%;
+}
+.search{
+	height: 20px;
+	width: 20px;
+	margin-top: 0;
+	margin-left: auto;
+}
+.add{
+	height: 20px;
+	width: 20px;
+	margin-top: 0;
+	margin-right: 0;
+}
+.top_input{
+	height: 20px;
+	width: 80%;
+	
+	border-radius: 20px;
+	border: solid 1px #C0C0C0;
+}
+
