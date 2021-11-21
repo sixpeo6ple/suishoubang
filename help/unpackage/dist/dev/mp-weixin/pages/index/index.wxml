@@ -1,0 +1,1 @@
+<view><view class="top"><navigator url="../add/add" hover-class="nevigator-hover"><image class="add" src="../../static/add.png"></image></navigator></view></view>
