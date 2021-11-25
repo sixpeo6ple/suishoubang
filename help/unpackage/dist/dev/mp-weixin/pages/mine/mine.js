@@ -10,7 +10,7 @@
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 5);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
-var _mine = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/mine.vue */ 33));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _mine = _interopRequireDefault(__webpack_require__(/*! ./pages/mine/mine.vue */ 33));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 createPage(_mine.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
@@ -128,7 +128,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
 //
 //
 //
@@ -141,7 +143,72 @@ var _default =
 
 
   },
-  methods: {} };exports.default = _default;
+  methods: {
+    getUserProfile: function getUserProfile(e) {
+      console.log(e);
+      var that = this;
+      uni.login({
+        provider: 'weixin',
+        success: function success(resp) {
+          var code = resp.code;
+          that.code = code;
+        } });
+
+      uni.getUserProfile({
+        desc: '登录以获取信息',
+        success: function success(resp) {
+          var nickName = resp.userInfo.nickName;
+          console.log(nickName);
+          var avatarUrl = resp.userInfo.avatarUrl;
+          console.log(avatarUrl);
+          var data = {
+            code: that.code,
+            nickname: nickName,
+            photo: avatarUrl };
+
+          console.log(data);
+          uni.request({
+            url: 'https://api.suishoubang.myrating.cn/login/doLogin',
+            method: 'Get',
+            data: {
+              code: data.code },
+
+            success: function success(r) {
+              console.log(r);
+              uni.setStorageSync('tokenName', r.data.data.tokenName);
+              uni.setStorageSync('tokenValue', r.data.data.tokenValue);
+              uni.setStorageSync('session_key', r.data.data.session_key);
+              uni.setStorageSync('openid', r.data.data.openid);
+            } });
+
+        } });
+
+      /* uni.getUserProfile({
+              	desc: '登录以获取信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+              	success: function(resp){
+              		uni.login({
+              			success:function(res){
+              				console.log(res.code);
+              				let code = res.code;
+              				let nickName = resp.userInfo.nickName;
+              				let avatarUrl = resp.userInfo.avatarUrl;
+              				let data = {
+              					code:code,
+              					nickname:nickName,
+              					photo:avatarUrl
+              				}
+              				console.log(data);
+              			},
+              		})
+              		console.log("success");
+              		console.log(resp.userInfo);
+              	},
+              	fail(err) {
+              		console.log("error");
+              	}
+              }); */
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

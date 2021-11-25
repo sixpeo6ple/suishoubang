@@ -13,11 +13,13 @@
 <script>
 	export default {
 		data() {
-			
+			return {
+				
+			}
 		},
-		onLoad() {
+		/* onLoad() {
 
-		},
+		}, */
 		methods: {
 
 		}
@@ -41,7 +43,7 @@
 		height: 20px;
 		width: 20px;
 		margin-top: 0;
-		margin-right: 0;
+		margin-left: 90%;
 	}
 	
 	.top_input{

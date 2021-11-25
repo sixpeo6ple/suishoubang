@@ -1,1 +1,1 @@
-<view>hello</view>
+<view class="content"><view class="userinfo"><button data-event-opts="{{[['tap',[['getUserProfile',['$event']]]]]}}" bindtap="__e">授权</button></view></view>
