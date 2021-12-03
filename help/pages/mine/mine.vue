@@ -1,7 +1,13 @@
 <template>
 	<view class="content">
-		<view class="userinfo">
-			<button @tap="getUserProfile">授权</button>
+		<view class="blank1"></view>
+		<view class="userinfo" v-if="nickName">
+			<image :src="avatarUrl" class="photo"></image>
+			<view class="blank2"></view>
+			<text class="name">{{ nickName }}</text>
+		</view>
+		<view class="predown" v-else>
+			<button @tap="getUserProfile" class="but">登录</button>
 		</view>
 	</view>
 </template>
@@ -10,7 +16,8 @@
 	export default {
 		data() {
 			return {
-				
+				nickName: '',
+				avatarUrl: ''
 			}
 		},
 		methods: {
@@ -22,26 +29,27 @@
 					success: function(resp){
 						let code = resp.code;
 						that.code = code;
+						console.log(code);
 					}
 				})
 				uni.getUserProfile({
 					desc:'登录以获取信息',
 					success: function(resp){
-						let nickName = resp.userInfo.nickName;
-						console.log(nickName);
-						let avatarUrl = resp.userInfo.avatarUrl;
-						console.log(avatarUrl);
-						let data = {
+						that.nickName = resp.userInfo.nickName;
+						console.log(that.nickName);
+						that.avatarUrl = resp.userInfo.avatarUrl;
+						console.log(that.avatarUrl);
+						that.data = {
 							code: that.code,
-							nickname: nickName,
-							photo: avatarUrl
+							nickname: that.nickName,
+							photo: that.avatarUrl
 						};
-						console.log(data);
+						console.log(that.data);
 						uni.request({
 							url:'https://api.suishoubang.myrating.cn/login/doLogin',
 							method:'Get',
 							data: {
-								code: data.code
+								code: that.data.code
 							},
 							success(r) {
 								console.log(r);
@@ -53,35 +61,34 @@
 						})
 					}
 				})
-				/* uni.getUserProfile({
-					desc: '登录以获取信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-					success: function(resp){
-						uni.login({
-							success:function(res){
-								console.log(res.code);
-								let code = res.code;
-								let nickName = resp.userInfo.nickName;
-								let avatarUrl = resp.userInfo.avatarUrl;
-								let data = {
-									code:code,
-									nickname:nickName,
-									photo:avatarUrl
-								}
-								console.log(data);
-							},
-						})
-						console.log("success");
-						console.log(resp.userInfo);
-					},
-					fail(err) {
-						console.log("error");
-					}
-				}); */
 			},
 			}
 	}
 </script>
 
 <style>
-
+	.blank1{
+		height: 100px;
+	}
+	.blank2{
+		height: 30px;
+	}
+	.photo{
+		border-radius: 50%;
+		display: block;
+		margin: auto;
+		height: 50px;
+		width: 50px;
+	}
+	.name{
+		display: block;
+		margin: auto;
+		text-align: center;
+	}
+	.but{
+		display: block;
+		margin: auto;
+		border-radius: 12px;
+		width: 100px;
+	}
 </style>

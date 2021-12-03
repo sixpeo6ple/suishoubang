@@ -1,1 +1,1 @@
-<view class="content"><view class="userinfo"><button data-event-opts="{{[['tap',[['getUserProfile',['$event']]]]]}}" bindtap="__e">授权</button></view></view>
+<view class="content"><view class="blank1"></view><block wx:if="{{nickName}}"><view class="userinfo"><image class="photo" src="{{avatarUrl}}"></image><view class="blank2"></view><text class="name">{{nickName}}</text></view></block><block wx:else><view class="predown"><button data-event-opts="{{[['tap',[['getUserProfile',['$event']]]]]}}" class="but" bindtap="__e">登录</button></view></block></view>

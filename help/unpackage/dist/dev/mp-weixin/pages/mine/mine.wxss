@@ -1,0 +1,26 @@
+
+.blank1{
+	height: 100px;
+}
+.blank2{
+	height: 30px;
+}
+.photo{
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	height: 50px;
+	width: 50px;
+}
+.name{
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+.but{
+	display: block;
+	margin: auto;
+	border-radius: 12px;
+	width: 100px;
+}
+
