@@ -136,7 +136,24 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -151,14 +168,52 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      array_mess: [] };
+
+  },
+  onLoad: function onLoad(r) {
+    var that = this;
+    wx.request({
+      url: 'https://api.suishoubang.myrating.cn/order/showAll',
+      method: 'GET',
+      header: that.getHeader(),
+      data: {
+        //0全部 1还没人接的单子 2有人接还没有完成的单子 3已经完成的单子        
+        status: 0 },
+
+      success: function success(r) {
+        that.num = r.data.data.length;
+        var array_mess = new Array();
+        for (var i = 0; i < that.num; i++) {
+          var each_mess = { id: '', destination: '', method: '', money: '' };
+          each_mess.id = r.data.data[i].id;
+          each_mess.destination = r.data.data[i].payerPlace;
+          each_mess.method = r.data.data[i].deliverType;
+          each_mess.money = r.data.data[i].price;
+          that.array_mess.push(each_mess);
+        }
+        console.log(r);
+        console.log(r.data.data.length);
+        console.log(that.num);
+        console.log(that.array_mess);
+      } });
 
 
   },
-  /* onLoad() {
-     	}, */
+  methods: {
+    getHeader: function getHeader() {
+      var tokenName = uni.getStorageSync('tokenName');
+      var tokenValue = uni.getStorageSync('tokenValue');
+      var header = {
+        "content-type": "application/x-www-form-urlencoded" };
 
-  methods: {} };exports.default = _default;
+      if (tokenName != undefined && tokenName != '') {
+        header[tokenName] = tokenValue;
+      }
+      return header;
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 18 */

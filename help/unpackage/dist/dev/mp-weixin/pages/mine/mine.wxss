@@ -23,4 +23,8 @@
 	border-radius: 12px;
 	width: 100px;
 }
+.stu_card{
+	display: flex;
+	overflow: auto;
+}
 

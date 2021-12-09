@@ -2,8 +2,10 @@
 	<view>
 		<image class="advertisement" src="../../static/adv.png"></image>
 		<view>
-			<image class="pic" src="../../static/expressage.png"></image>
-			快递代取
+			<navigator url="../expressage/expressage">
+				<image class="pic" src="../../static/expressage.png"></image>
+				快递代取
+			</navigator>
 		</view>
 		<view>
 			<image class="pic" src="../../static/errand.png"></image>
@@ -52,7 +54,7 @@
 		margin-left: 25%;
 	}
 	.pic{
-		height: 60px;
+		height: 70px;
 		width: 25%;
 		margin-left: 25%;
 	}

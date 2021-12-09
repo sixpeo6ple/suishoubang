@@ -144,12 +144,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      nickName: '',
-      avatarUrl: '' };
+      nickName: uni.getStorageSync("nickName"),
+      avatarUrl: uni.getStorageSync("avatarUrl"),
+      session_key: uni.getStorageSync("session_key"),
+      name: uni.getStorageSync("collectName"),
+      picURL: uni.getStorageSync("url"),
+      sid: uni.getStorageSync("sid"),
+      phone: uni.getStorageSync("phone"),
+      place: uni.getStorageSync("position") };
 
   },
   methods: {
@@ -176,6 +197,8 @@ var _default =
             nickname: that.nickName,
             photo: that.avatarUrl };
 
+          uni.setStorageSync('nickName', that.nickName);
+          uni.setStorageSync('avatarUrl', that.avatarUrl);
           console.log(that.data);
           uni.request({
             url: 'https://api.suishoubang.myrating.cn/login/doLogin',
@@ -184,7 +207,9 @@ var _default =
               code: that.data.code },
 
             success: function success(r) {
+              console.log("-------");
               console.log(r);
+              console.log("session_key" + r.data.data.session_key);
               uni.setStorageSync('tokenName', r.data.data.tokenName);
               uni.setStorageSync('tokenValue', r.data.data.tokenValue);
               uni.setStorageSync('session_key', r.data.data.session_key);
@@ -192,6 +217,34 @@ var _default =
             } });
 
         } });
+
+    },
+    getHeader: function getHeader() {
+      var tokenName = uni.getStorageSync('tokenName');
+      var tokenValue = uni.getStorageSync('tokenValue');
+      var header = {
+        "content-type": "application/x-www-form-urlencoded" };
+
+      if (tokenName != undefined && tokenName != '') {
+        header[tokenName] = tokenValue;
+      }
+      return header;
+    },
+    getUserProfile_token: function getUserProfile_token() {
+      var that = this;
+      uni.request({
+        url: 'https://api.suishoubang.myrating.cn/login/isLogin',
+        header: that.getHeader(),
+        method: 'Get',
+        success: function success(r) {
+          console.log("++++++++");
+          console.log(r);
+        } });
+
+    },
+    goto: function goto() {
+      uni.navigateTo({
+        url: '../stuinfo/stuinfo' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

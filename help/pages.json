@@ -10,21 +10,22 @@
 		{
 			"path":"pages/message/message",
 			"style":{
-				"navigationBarTitleText":"message"
+				"navigationBarTitleText":"消息"
 			}
 		},
 		
 		{
 			"path":"pages/collection/collection",
 			"style":{
-				"navigationBarTitleText":"collection"
+				"navigationBarTitleText":"收藏夹"
 			}
 		},
 		
 		{
 			"path":"pages/mine/mine",
 			"style":{
-				"navigationBarTitleText":"mine"
+				"navigationBarTitleText":"我的",
+				"enablePullDownRefresh":true
 			}
 		},
 		
@@ -34,13 +35,36 @@
 				"backgroundColor":"#007AFF"
 			}
 			
+		},
+		
+		{
+			"path":"pages/expressage/expressage",
+			"style":{
+				"navigationBarTitleText":"快递代取"
+			}
+			
+		},
+		
+		{
+			"path":"pages/eachorder/eachorder",
+			"style":{
+				"navigationBarTitleText":""
+			}
+			
+		},
+		
+		{
+			"path":"pages/stuinfo/stuinfo",
+			"style":{
+				"navigationBarTitleText":"学生信息认证"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#ffffff"
 	},
 	"tabBar":{
 		"list":[
