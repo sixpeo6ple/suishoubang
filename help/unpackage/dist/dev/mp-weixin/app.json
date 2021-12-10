@@ -7,6 +7,8 @@
     "pages/add/add",
     "pages/expressage/expressage",
     "pages/eachorder/eachorder",
+    "pages/myorder/myorder",
+    "pages/myreceived/myreceived",
     "pages/stuinfo/stuinfo"
   ],
   "subPackages": [],

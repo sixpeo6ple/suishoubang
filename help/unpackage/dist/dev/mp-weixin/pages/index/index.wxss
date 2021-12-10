@@ -28,6 +28,11 @@
 	border-color: gray;
 	display: flex;
 }
+.pic{
+	border-radius: 50%;
+	height: 50px;
+	width: 60px;
+}
 .blank4{
 	height: 1px;
 }

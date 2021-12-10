@@ -16,4 +16,9 @@
 	background-color: #00aaff;
 	margin-right: 0;
 }
+.img{
+	height: 20px;
+	width: 20px;
+	margin: auto;
+}
 

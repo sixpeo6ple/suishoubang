@@ -164,7 +164,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
@@ -174,18 +173,17 @@ var _default =
   },
   onLoad: function onLoad(r) {
     var that = this;
-    wx.request({
+    uni.request({
       url: 'https://api.suishoubang.myrating.cn/order/showAll',
       method: 'GET',
       header: that.getHeader(),
       data: {
         //0全部 1还没人接的单子 2有人接还没有完成的单子 3已经完成的单子        
-        status: 0 },
+        status: 1 },
 
       success: function success(r) {
-        that.num = r.data.data.length;
-        var array_mess = new Array();
-        for (var i = 0; i < that.num; i++) {
+        var num = r.data.data.length;
+        for (var i = 0; i < num; i++) {
           var each_mess = { id: '', destination: '', method: '', money: '' };
           each_mess.id = r.data.data[i].id;
           each_mess.destination = r.data.data[i].payerPlace;
@@ -195,10 +193,35 @@ var _default =
         }
         console.log(r);
         console.log(r.data.data.length);
-        console.log(that.num);
         console.log(that.array_mess);
       } });
 
+  },
+  onPullDownRefresh: function onPullDownRefresh(e) {
+    var that = this;
+    that.array_mess = [];
+    uni.request({
+      url: 'https://api.suishoubang.myrating.cn/order/showAll',
+      method: 'GET',
+      header: that.getHeader(),
+      data: {
+        //0全部 1还没人接的单子 2有人接还没有完成的单子 3已经完成的单子        
+        status: 1 },
+
+      success: function success(r) {
+        var num = r.data.data.length;
+        for (var i = 0; i < num; i++) {
+          var each_mess = { id: '', destination: '', method: '', money: '' };
+          each_mess.id = r.data.data[i].id;
+          each_mess.destination = r.data.data[i].payerPlace;
+          each_mess.method = r.data.data[i].deliverType;
+          each_mess.money = r.data.data[i].price;
+          that.array_mess.push(each_mess);
+        }
+        console.log(r);
+        console.log(r.data.data.length);
+        console.log(that.array_mess);
+      } });
 
   },
   methods: {
@@ -212,6 +235,13 @@ var _default =
         header[tokenName] = tokenValue;
       }
       return header;
+    },
+    goto: function goto(r) {
+      var iid = r;
+      console.log(iid);
+      uni.navigateTo({
+        url: '../eachorder/eachorder?id=' + iid });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
