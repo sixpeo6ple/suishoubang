@@ -51,10 +51,10 @@
 			<!-- 上传身份码 -->
 			<view class="pic">
 				<text class="text_label_">上传身份码</text>
-				<view class="img_box" @click="addpic" v-if="exp_data.idcode_url === undefined || exp_data.idcode_url === ''">
+				<view class="img_box" @click="addpic">
 					<image class="img" src="../../static/onload.png"></image>
 				</view>
-				<view class="img_box" v-else>
+				<view class="img_box">
 					<image class="img" :src="exp_data.idcode_url" mode="aspectFill"></image>
 				</view>
 			</view>
@@ -220,8 +220,8 @@
 				uni.setStorageSync("code", that.exp_data.code);
 				uni.setStorageSync("receviced_time", that.exp_data.receviced_time);
 				uni.setStorageSync("method", that.exp_data.method);
-				uni.setStorageSync("bag_size", that.exp_data.bag_size); */
-				console.log("需求数据已缓存");
+				uni.setStorageSync("bag_size", that.exp_data.bag_size);
+				console.log("需求数据已缓存"); */
 				console.log(JSON.stringify(that.exp_data.idcode_url));
 				if (uni.getStorageSync('idcodeurl') === undefined || uni.getStorageSync('idcodeurl') === ''
 					|| that.exp_data.code == '' || that.exp_data.bag_size == '' || that.exp_data.money == ''

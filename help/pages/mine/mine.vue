@@ -34,12 +34,23 @@
 				nickName: uni.getStorageSync("nickName"),
 				avatarUrl: uni.getStorageSync("avatarUrl"),
 				session_key: uni.getStorageSync("session_key"),
-				name: uni.getStorageSync("collectName"),
+				name: uni.getStorageSync("collectName"),		//以下改为从数据库中拿，因为认证不需要重复操作，缓存的数据可能会被清理
 				picURL: uni.getStorageSync("url"),
 				sid: uni.getStorageSync("sid"),
 				phone: uni.getStorageSync("phone"),
 				place: uni.getStorageSync("position")
 			}
+		},
+		onPullDownRefresh: function(e) {
+			var that = this;
+			that.nickName = uni.getStorageSync("nickName");
+			that.avatarUrl = uni.getStorageSync("avatarUrl");
+			that.session_key = uni.getStorageSync("session_key");
+			that.name = uni.getStorageSync("collectName");
+			that.picURL = uni.getStorageSync("url");
+			that.sid = uni.getStorageSync("sid");
+			that.phone = uni.getStorageSync("phone");
+			that.place = uni.getStorageSync("position");
 		},
 		methods: {
 			getUserProfile(e) {
