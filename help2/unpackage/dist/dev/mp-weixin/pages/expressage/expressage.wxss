@@ -1,0 +1,72 @@
+
+.blank3{
+	height: 15px;
+}
+.blank4{
+	height: 1px;
+}
+.expressage_message{
+	width: 90%;
+	margin: auto;
+}
+.place{
+	width: 90%;
+	height: 45px;
+	border-radius: 12px;
+	border-style: solid;
+	border-color: gray;
+	display: flex;
+}
+.text_label{
+	width: 22%;
+	height: 20px;
+	display: block;
+	margin-left: 10px;
+	margin-top: 11px;
+	border-style: inset;
+	border-color: #00aaff;
+	border-width: 1px;
+	border-radius: 8px;
+	color: #ffffff;
+	background-color: #00aaff;
+}
+.in{
+	display: block;
+	height: 30px;
+	margin-left: 10px;
+	margin-top: 5px;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 1px;
+	border-style: solid;
+	border-color: #ff00ff;
+}
+.select{
+	display: flex;
+}
+.uni-list{
+}
+.bottom{
+	display: block;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
+.sub{
+	display: block;
+	width: 30%;
+	border-radius: 15px;
+	border-style: inset;
+	border-color: #00aaff;
+	border-width: 1px;
+	color: #ffffff;
+	background-color: #00aaff;
+	margin-right: 0;
+}
+.img{
+	height: 20px;
+	width: 20px;
+	margin: auto;
+}
+

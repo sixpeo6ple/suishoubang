@@ -1,0 +1,12 @@
+
+.advertisement{
+	height: 100px;
+	width: 50%;
+	margin-left: 25%;
+}
+.pic{
+	height: 70px;
+	width: 25%;
+	margin-left: 25%;
+}
+

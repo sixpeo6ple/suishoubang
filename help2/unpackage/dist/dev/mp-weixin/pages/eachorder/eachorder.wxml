@@ -1,0 +1,1 @@
+<view><text>{{id}}</text><view class="bottom"><button data-event-opts="{{[['tap',[['ftaking',['$event']]]]]}}" class="sub" bindtap="__e">接单</button></view></view>
