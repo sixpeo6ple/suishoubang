@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="message">
 		<!-- 选择查看我的订单还是我的接单 -->
 		<view class="select">
 			<button class="butt" @click="select1">我的订单</button>
@@ -10,15 +10,15 @@
 			<list>
 				<cell v-for="(item, index) in array_mess_payer" :key="array_mess_payer.id">
 					<view class="block" @click="goto(array_mess_payer[index].id)">
-						<text>送货点：{{ array_mess_payer[index].destination }}</text>
-						<br>
-						<text>送货方式：{{ array_mess_payer[index].method }}</text>
-						<br>
-						<text>报酬：{{ array_mess_payer[index].money}}</text>
-						<br>
+						<view class="text">
+							<text>送货点：{{ array_mess_payer[index].destination }}</text>
+							<br>
+							<text>送货方式：{{ array_mess_payer[index].method }}</text>
+							<br>
+							<text>报酬：{{ array_mess_payer[index].money}}</text>
+						</view>
 						<image class="pic" src="../../static/expressage.png"></image>
 					</view>
-					<view class="blank4"></view>
 				</cell>
 			</list>
 		</view>
@@ -27,15 +27,15 @@
 			<list>
 				<cell v-for="(item, index) in array_mess_receiver" :key="array_mess_receiver.id">
 					<view class="block" @click="goto_(array_mess_receiver[index].id)">
-						<text>送货点：{{ array_mess_receiver[index].destination }}</text>
-						<br>
-						<text>送货方式：{{ array_mess_receiver[index].method }}</text>
-						<br>
-						<text>报酬：{{ array_mess_receiver[index].money}}</text>
-						<br>
+						<view class="text">
+							<text>送货点：{{ array_mess_receiver[index].destination }}</text>
+							<br>
+							<text>送货方式：{{ array_mess_receiver[index].method }}</text>
+							<br>
+							<text>报酬：{{ array_mess_receiver[index].money}}</text>
+						</view>
 						<image class="pic" src="../../static/expressage.png"></image>
 					</view>
-					<view class="blank4"></view>
 				</cell>
 			</list>
 		</view>
@@ -195,22 +195,46 @@
 </script>
 
 <style>
+	page{
+		background-color: rgb(228, 236, 241);
+	}
 	.block{
-		width: 90%;
+		width: 95%;
 		height: 90px;
-		border-radius: 12px;
+		margin: auto;
+		margin-top: 20px;
+		background-color: #F1F1F1;
+		border-radius: 10px;
 		border-style: solid;
-		border-color: gray;
+		border-width: 0.1mm;
+		border-color: rgb(119, 118, 68);
 		display: flex;
 	}
-	
+	.text{
+		display: flex;
+		flex-direction: column;
+		margin-top: 10px;
+		margin-left: auto;
+		font-size: 15px;
+	}
+	.select{
+		display: flex;
+		flex-direction: row;
+	}
+	.butt{
+		display: block;
+		margin-top: 20px;
+		border-radius: 13px;
+		background-color: rgb(246,237,218);
+		border: 3px solid rgb(219,229,228);
+	}
 	.pic{
-		border-radius: 50%;
-		height: 50px;
-		width: 60px;
+		margin-top: 10px;
+		height: 70px;
+		width: 70px;
+		margin-left: auto;
+		margin-right: 10px;
 	}
 	
-	.blank4{
-		height: 1px;
-	}
 </style>
+

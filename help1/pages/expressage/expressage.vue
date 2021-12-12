@@ -6,18 +6,17 @@
 				<text class="text_label">取货码</text>
 				<input class="in" @input="fcode"/>
 			</view>
-			<view class="blank4"></view>
 			
 			<view class="place">
 				<text class="text_label">送货日期</text>
 				<!-- 日期选择器 -->
-				<view class="uni-list-cell-db">
+				<view class="uni-list">
 				    <picker mode="date" :value="exp_data.date" :start="startDate" :end="endDate" @change="bindDateChange">
 				        <view class="uni-input">{{ exp_data.date }}</view>
 				    </picker>
 				</view>
 			</view>
-			<view class="blank4"></view>
+			
 			<view class="place">
 				<text class="text_label">送货时间</text>
 				<!-- 时间选择器 -->
@@ -27,7 +26,7 @@
 			        </picker>
 				</view>
 			</view>
-			<view class="blank4"></view>
+			
 			<view class="place">
 				<text class="text_label">送货方式</text>
 				<!-- 单选 -->
@@ -37,20 +36,20 @@
 							<view>
 								<radio :value="item.value" :checked="index === current" />
 							</view>
-							<view>{{item.name}}</view>
+							<text>{{item.name}}</text>
 						</label>
 					</view>
 				</radio-group>
 			</view>
-			<view class="blank3"></view>
+			
 			<view class="place">
-				<text class="text_label_">快递大小</text>
+				<text class="text_label">快递大小</text>
 				<input class="in" @input="fbag_size"/>
 			</view>
-			<view class="blank4"></view>
+			
 			<!-- 上传身份码 -->
 			<view class="pic">
-				<text class="text_label_">上传身份码</text>
+				<text class="text_label">上传身份码</text>
 				<view class="img_box" @click="addpic">
 					<image class="img" src="../../static/onload.png"></image>
 				</view>
@@ -58,9 +57,9 @@
 					<image class="img" :src="exp_data.idcode_url" mode="aspectFill"></image>
 				</view>
 			</view>
-			<view class="blank4"></view>
+			
 			<view class="place">
-				<text class="text_label_">悬赏价格</text>
+				<text class="text_label">悬赏价格</text>
 				<input class="in" @input="fmoney"/>
 			</view> 
 		</view>
@@ -257,9 +256,9 @@
 								uni.showModal({
 									content: '发布成功'
 								})
-								/* uni.navigateTo({
-									url:'../add/add'
-								}) */
+								uni.reLaunch({
+									url:'../message/message'
+								})
 							}
 						}
 					})
@@ -270,75 +269,61 @@
 </script>
 
 <style>
-	.blank3{
-		height: 15px;
-	}
-	.blank4{
-		height: 1px;
+	page{
+		background-color: rgb(219,228,229);
 	}
 	.expressage_message{
 		width: 90%;
 		margin: auto;
 	}
-	.place{
-		width: 90%;
-		height: 45px;
-		border-radius: 12px;
-		border-style: solid;
-		border-color: gray;
-		display: flex;
-	}
 	.text_label{
-		width: 22%;
-		height: 20px;
 		display: block;
-		margin-left: 10px;
-		margin-top: 11px;
-		border-style: inset;
-		border-color: #00aaff;
-		border-width: 1px;
-		border-radius: 8px;
-		color: #ffffff;
-		background-color: #00aaff;
+		color: rgb(66, 66, 41);
+		text-align: center;
+		margin-top: 20px;
+		border-radius: 13px;
+		width: 100px;
+		background-color: rgb(246,237,218);
+		border: 3px solid rgb(219,229,228);
 	}
 	.in{
-		display: block;
-		height: 30px;
-		margin-left: 10px;
+		border: solid rgb(119, 118, 68);
+		border-width: 0px 0px 1.5px 0px;
+		height: 45px;
 		margin-top: 5px;
-		border-top-width: 0;
-		border-left-width: 0;
-		border-right-width: 0;
-		border-bottom-width: 1px;
-		border-style: solid;
-		border-color: #ff00ff;
-	}
-	.select{
-		display: flex;
+		margin-left: 3px;
+		margin-right: 3px;
+		padding-left: 10px;
 	}
 	.uni-list{
-		
+		margin-top: 20px;
+		margin-left: 15px;
 	}
-	.bottom{
-		display: block;
-		width: 100%;
-		position: fixed;
-		bottom: 0;
+	.select{
+		margin-left: 10px;
+		margin-top: 10px;
+		display: flex;
+		flex-direction: row;
+	}
+	.uni-list-cell{
+		margin-top: 10px;
+		margin-right: 5px;
+		display: flex;
+		flex-direction: row;
 	}
 	.sub{
 		display: block;
-		width: 30%;
-		border-radius: 15px;
-		border-style: inset;
-		border-color: #00aaff;
-		border-width: 1px;
-		color: #ffffff;
-		background-color: #00aaff;
-		margin-right: 0;
+		margin-top: 20px;
+		border-radius: 13px;
+		width: 100px;
+		background-color: rgb(246,237,218);
+		border: 3px solid rgb(219,229,228);
+	}
+	.img_box{
+		text-align: center;
 	}
 	.img{
 		height: 20px;
 		width: 20px;
-		margin: auto;
 	}
 </style>

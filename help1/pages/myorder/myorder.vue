@@ -1,17 +1,32 @@
 <template>
 	<view>
-		<text> {{ id }}</text>
-		<view class="pic">
-			<text class="text_label_">更新身份码</text>
+		<view class="comb">
+			<text class="title">取件码</text>
+			<text class="value">{{ info }}</text>
+			<text class="title">取件人姓名</text>
+			<text class="value">{{ payername }}</text>
+			<text class="title">收货地址</text>
+			<text class="value">{{ payerplace }}</text>
+			<text class="title">收货方式</text>
+			<text class="value">{{ delivertype }}</text>
+			<text class="title">收货时间</text>
+			<text class="value">{{ delivertime }}</text>
+			<text class="title">价格</text>
+			<text class="value">{{ price }}</text>
+			<text class="title">取件人电话</text>
+			<text class="value">{{ payerphone }}</text>
+		</view>
+		<view class="pic" v-if="sign != '3'">
+			<text class="title">更新身份码</text>
 			<view class="img_box" @click="addpic">
 				<image class="img" src="../../static/onload.png"></image>
 			</view>
 			<view class="img_box">
-				<image class="img" :src="picurl" mode="aspectFill"></image>
+				<image class="img" :src="picurl" mode="aspectFill" @click="enlarge(picurl)"></image>
 			</view>
 		</view>
 		<view class="bottom">
-			<button class = "sub" @click="ffinish" v-if="dis == 0">结束订单</button>
+			<button class = "sub" @click="ffinish" v-if="sign != '3'">结束订单</button>
 			<text v-else>订单结束</text>
 		</view>
 	</view>
@@ -21,8 +36,15 @@
 	export default {
 		data() {
 			return {
-				dis: 0,		//改进：向后端请求status作为标记，即结束订单的时候后端返回的数据包含status
+				sign: '',	//改进：向后端请求status作为标记，即结束订单的时候后端返回的数据包含status
 				picurl: '',
+				info: '',
+				payername: '',
+				payerplace: '',
+				delivertype: '',
+				delivertime: '',
+				price: '',
+				payerphone: '',
 				id: 0
 			}
 		},
@@ -38,6 +60,15 @@
 					id: r.id
 				},
 				success(r) {
+					that.delivertype = r.data.data[0].deliverType;
+					that.info = r.data.data[0].info;
+					that.payername = r.data.data[0].payerName;
+					that.payerplace = r.data.data[0].payerPlace;
+					that.price = r.data.data[0].price;
+					that.payerphone = r.data.data[0].payerPhone;
+					that.delivertime = r.data.data[0].deliverTime;
+					that.picurl = r.data.data[0].picUrl;
+					that.sign = r.data.data[0].status;
 					console.log(r)
 				}
 			})
@@ -105,6 +136,13 @@
 					}
 				})
 			},
+			/* 放大图片 */
+			enlarge(e) {
+				var URL = e;
+				uni.navigateTo({
+					url: '../exh/exh?po=' + URL
+				})
+			},
 			ffinish: function(r) {
 				var that = this;
 				var fin_id = that.id;
@@ -118,7 +156,7 @@
 				    },  
 				    success(r){
 						console.log("===========");
-						that.dis = 1;
+						that.sign = r.data.data.status;
 				        console.log(r);
 						uni.showModal({
 							content: "订单已结束"
@@ -131,26 +169,53 @@
 </script>
 
 <style>
-	.bottom{
+	page{
+		background-color: rgb(228, 236, 241);
+	}
+	.comb{
+		display: flex;
+		flex-direction: column;
+	}
+	.title{
 		display: block;
-		width: 100%;
-		position: fixed;
-		bottom: 0;
+		color: rgb(66, 66, 41);
+		text-align: center;
+		margin-top: 20px;
+		margin-left: 10px;
+		border-radius: 13px;
+		width: 100px;
+		background-color: rgb(246,237,218);
+		border: 3px solid rgb(219,229,228);
+	}
+	.value{
+		margin-top: 20px;
+		margin-right: 20px;
+		margin-left: 20px;
+		text-align: right;
+		border: solid rgb(196, 196, 120);
+		border-width: 0px 0px 1px 0px;
+		padding-right: 10px;
+		font-size: 15px;
+	}
+	.bottom{
+		margin-top: 20px;
 	}
 	.sub{
-		display: block;
-		width: 30%;
-		border-radius: 15px;
-		border-style: inset;
-		border-color: #00aaff;
-		border-width: 1px;
-		color: #ffffff;
-		background-color: #00aaff;
-		margin-right: 0;
+		background-color: rgb(246,237,218);
+		border-radius: 5px;
+		margin: 10px;
+	}
+	.pic{
+		display: flex;
+		flex-direction: row;
+	}
+	.img_box{
+		text-align: center;
 	}
 	.img{
 		height: 20px;
 		width: 20px;
-		margin: auto;
+		margin-top: 20px;
+		margin-left: 20px;
 	}
 </style>

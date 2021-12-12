@@ -1,28 +1,27 @@
 <template>
-	<view class="content">
+	<view class="content" style="background-image: url(../../static/background1.png);background-size:100% 100%;">
 		<!-- 登录 -->
 		<view class="blank1"></view>
 		<view class="userinfo" v-if="nickName">
 			<image :src="avatarUrl" class="photo"></image>
 			<view class="blank2"></view>
 			<text class="name">{{ nickName }}</text>
+			<!-- 登陆成功，进行学生认证 -->
+			<view class="student">
+				<view class="stu_card" v-if="name">
+					<text class="text">{{ name }}</text>
+					<text class="text">{{ sid }}</text>
+					<text class="text">{{ place }}</text>
+					<text class="text">{{ phone }}</text>
+				</view>
+				<view v-else>
+					<button class="but" @click="goto">去认证</button>
+				</view>
+			</view>
 		</view>
 		<view class="predown" v-else>
-			<button @tap="getUserProfile_token" class="but" v-if="session_key">登录1</button>
-			<button @tap="getUserProfile" class="but" v-else>登录2</button>
-		</view>
-		<!-- 进行学生认证 -->
-		<view class = "student">	
-			<view class = "stu_card" v-if="name">
-				<image :src="picURL" class="photo"></image>
-				<text class="name">{{ name }}</text>
-				<text class="sid">{{ sid }}</text>
-				<text class="place">{{ place }}</text>
-				<text class="phone">{{ phone }}</text>
-			</view>
-			<view v-else>
-				<button class="but" @click="goto">去认证</button>
-			</view>
+			<button @tap="getUserProfile_token" class="but" v-if="session_key">注册及登陆</button>
+			<button @tap="getUserProfile" class="but" v-else>请登陆</button>
 		</view>
 	</view>
 </template>
@@ -34,23 +33,12 @@
 				nickName: uni.getStorageSync("nickName"),
 				avatarUrl: uni.getStorageSync("avatarUrl"),
 				session_key: uni.getStorageSync("session_key"),
-				name: uni.getStorageSync("collectName"),		//以下改为从数据库中拿，因为认证不需要重复操作，缓存的数据可能会被清理
+				name: uni.getStorageSync("collectName"),
 				picURL: uni.getStorageSync("url"),
 				sid: uni.getStorageSync("sid"),
 				phone: uni.getStorageSync("phone"),
 				place: uni.getStorageSync("position")
 			}
-		},
-		onPullDownRefresh: function(e) {
-			var that = this;
-			that.nickName = uni.getStorageSync("nickName");
-			that.avatarUrl = uni.getStorageSync("avatarUrl");
-			that.session_key = uni.getStorageSync("session_key");
-			that.name = uni.getStorageSync("collectName");
-			that.picURL = uni.getStorageSync("url");
-			that.sid = uni.getStorageSync("sid");
-			that.phone = uni.getStorageSync("phone");
-			that.place = uni.getStorageSync("position");
 		},
 		methods: {
 			getUserProfile(e) {
@@ -121,16 +109,22 @@
 					}
 				})
 			},
- 			goto() {
+			goto() {
 				uni.navigateTo({
 					url:'../stuinfo/stuinfo'
 				})
-			} 
+			}
 		},
 	}
 </script>
 
 <style>
+	page{
+		height: 100%;
+	}
+	.content{
+		height: 100%;
+	}
 	.blank1{
 		height: 100px;
 	}
@@ -151,12 +145,19 @@
 	}
 	.but{
 		display: block;
-		margin: auto;
-		border-radius: 12px;
+		margin-top: 20px;
+		border-radius: 13px;
 		width: 100px;
+		background-color: rgb(246,237,218);
+		border: 3px solid rgb(219,229,228);
 	}
 	.stu_card{
 		display: flex;
-		overflow: auto;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 20px;
+	}
+	.text{
+		margin-top: 5px;
 	}
 </style>

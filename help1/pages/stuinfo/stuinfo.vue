@@ -1,34 +1,34 @@
+
 <template>
 	<view class = "input_info">
-		<view>
-			<view class="uni-form-item">
-				<view class="title">姓名</view>
-				<input class="uni-input" name="input" @input="collect_name"/>
+		<view class="uni-form-item">
+			<view class="title">姓名:</view>
+			<input class="uni-input" name="input" @input="collect_name"/>
 
-				<view class="title">学号</view>
-				<input class="uni-input" name="input" @input="collect_sid"/>
-					
-				<view class="title">地址</view>
-				<input class="uni-input" name="input" @input="collect_position" placeholder="X号楼XXX"/>
-
-				<view class="title">联系电话</view>
-				<input class="uni-input" name="input" @input="collect_phone" />
-					
-				<!-- 图片 -->
-				<view class="pic">
-					<view class="img_box" @click="addpic" v-if="studata.url === undefined || studata.url === ''">
-						<image class="img" src="../../static/onload.png"></image>
-					</view>
-					<view class="img_box" v-else>
-						<image class="img" :src="studata.url" mode="aspectFill"></image>
-					</view>
-				</view>
-			
-			</view>
+			<view class="title">学号:</view>
+			<input class="uni-input" name="input" @input="collect_sid"/>
 				
-			<view class="uni-btn-v">
-				<button @click="formsubmit">保存</button>
+			<view class="title">地址:</view>
+			<input class="uni-input" name="input" @input="collect_position" placeholder="X号楼XXX"/>
+
+			<view class="title">联系电话:</view>
+			<input class="uni-input" name="input" @input="collect_phone" />
+				
+			<!-- 图片 -->
+			<view class="title">校园卡/身份证：</view>
+			<view class="pic">
+					
+				<view class="img_box" @click="addpic">
+					<image class="img" src="../../static/onload.png"></image>
+				</view>
+				<view class="img_box">
+					<image class="img" :src="studata.url" mode="aspectFill"></image>
+				</view>
 			</view>
+		</view>
+			
+		<view class="uni-btn-v">
+			<button class='but' @click="formsubmit">保存</button>
 		</view>
 	</view>
 </template>
@@ -70,6 +70,8 @@
 					sizeType:['original', 'compressed'],
 					sourceType: ['album'],
 					success: function(res){
+						that.studata.url = res.tempFilePaths;
+						console.log(that.studata.url);
 						let path = res.tempFilePaths[0];
 						let index = path.lastIndexOf(".");
 						let ext = path.substr(index);	/* 文件后缀 */
@@ -96,8 +98,6 @@
 								})
 							}
 						})
-						that.studata.url = res.tempFilePaths;
-						console.log(that.studata.url);
 					}
 				})
 			},
@@ -135,7 +135,7 @@
 				    success(r) {
 				        console.log(r);
 						console.log("数据缓存成功");
-						uni.switchTab({
+						uni.reLaunch({
 							url:'../mine/mine'
 						})
 				    }
@@ -146,9 +146,39 @@
 </script>
 
 <style>
+	page{
+		background-color: rgb(219,228,229);
+	}
+	.title{
+		margin-top: 20px;
+		margin-left: 10px;
+	}
+	.uni-input{
+		border: solid #555555;
+		border-width: 0px 0px 1px 0px;
+		height: 45px;
+		margin-top: 5px;
+		margin-left: 3px;
+		margin-right: 3px;
+		padding-left: 10px;
+	}
 	.img{
 		height: 20px;
 		width: 20px;
 		margin: auto;
+	}
+	.img_box{
+		margin-top: 10px;
+		display: flex;
+		align-items: center;
+	}
+	.img{
+		height: 30px;
+		width: 30px;
+	}
+	.but{
+		background-color: rgb(246,237,218);
+		border-radius: 5px;
+		margin: 10px;
 	}
 </style>

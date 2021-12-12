@@ -1,25 +1,20 @@
 <template>
-	<view>
-		<view class="top">
-			<!-- <input class="top_input" type="text" confirm-type="search" />
-			<image class="search" src="../../static/search.png"></image> -->
-			<navigator url="../add/add" hover-class="navigator-hover">
-				<image class="add" src="../../static/add.png"></image>
-			</navigator>
-		</view>
-		<view>
+	<view class="home">
+		<view class="block1">
 			<list>
 				<cell v-for="(item, index) in array_mess" :key="array_mess.id">
 					<view class="block" @click="goto(array_mess[index].id)">
-						<text>送货点：{{ array_mess[index].destination }}</text>
-						<br>
-						<text>送货方式：{{ array_mess[index].method }}</text>
-						<br>
-						<text>报酬：{{ array_mess[index].money}}</text>
-						<br>
-						<image class="pic" src="../../static/expressage.png"></image>
+						<view class="text">
+							<text>送货点：{{ array_mess[index].destination }}</text>
+							<br>
+							<text>送货方式：{{ array_mess[index].method }}</text>
+							<br>
+							<text>报酬：{{ array_mess[index].money}} ¥</text>
+						</view>
+						<view class="pic1">
+							<image class="pic" src="../../static/expressage.png"></image>
+						</view>
 					</view>
-					<view class="blank4"></view>
 				</cell>
 			</list>
 		</view>
@@ -109,54 +104,37 @@
 	}
 </script>
 
-<style>	
-	.top{
-		height: var(--status-bar-height);
-		display: block;
+<style>
+	page{
 		width: 100%;
-		position: fixed;
-		top: 0;
+		background-color: rgb(228, 236, 241);
 	}
-	
-	/* .search{
-		height: 20px;
-		width: 20px;
-		margin-top: 0;
-		margin-left: auto;
-	} */
-	
-	.add{
-		display: block;
-		height: 20px;
-		width: 20px;
-		position: fixed;
-		right: 0;
-	}
-	
 	.block{
-		width: 90%;
+		width: 95%;
 		height: 90px;
-		border-radius: 12px;
+		margin: auto;
+		margin-top: 20px;
+		background-color: #F1F1F1;
+		border-radius: 10px;
 		border-style: solid;
-		border-color: gray;
+		border-width: 0.1mm;
+		border-color: rgb(119, 118, 68);
 		display: flex;
 	}
-	
+	.text{
+		display: flex;
+		flex-direction: column;
+		margin-top: 10px;
+		margin-left: auto;
+		font-size: 15px;
+	}
+	.pic1{
+		margin-left: auto;
+		margin-right: 20px;
+	}
 	.pic{
-		border-radius: 50%;
-		height: 50px;
-		width: 60px;
+		margin-top: 10px;
+		height: 70px;
+		width: 70px;
 	}
-	
-	.blank4{
-		height: 1px;
-	}
-	
-	/* .top_input{
-		height: 20px;
-		width: 80%;
-		
-		border-radius: 20px;
-		border: solid 1px #C0C0C0;
-	} */
 </style>
