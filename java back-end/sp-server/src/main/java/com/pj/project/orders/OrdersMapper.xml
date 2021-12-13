@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pj.project.orders.OrdersMapper">
+
+	<!-- 增 [G] -->
+	<insert id="add">
+		insert into 
+		orders (id, out_trade_no, create_time, payer_openid, receiver_openid, pic_url, info, price, deliver_place, deliver_time, deliver_type, type, status) 
+		values (#{id}, #{outTradeNo}, now(), #{payerOpenid}, #{receiverOpenid}, #{picUrl}, #{info}, #{price}, #{deliverPlace}, now(), #{deliverType}, #{type}, #{status}) 
+	</insert>
+
+	<!-- 删 -->
+	<delete id="delete">
+		delete from orders 
+		where id = #{id}
+	</delete>
+
+	<!-- 改 [G] -->
+	<update id="update">
+		update orders set
+		id = #{id}, 
+		out_trade_no = #{outTradeNo}, 
+		payer_openid = #{payerOpenid}, 
+		receiver_openid = #{receiverOpenid}, 
+		pic_url = #{picUrl}, 
+		info = #{info}, 
+		price = #{price}, 
+		deliver_place = #{deliverPlace}, 
+		deliver_type = #{deliverType}, 
+		type = #{type}, 
+		status = #{status}
+		where id = #{id}
+	</update>
+
+
+	<!-- ================================== 查询相关 ================================== -->
+	<!-- select id, out_trade_no, create_time, payer_openid, receiver_openid, pic_url, info, price, deliver_place, deliver_time, deliver_type, type, status from orders  -->
+	
+	<!-- 通用映射：手动模式 -->
+	<resultMap id="model" type="com.pj.project.orders.Orders">
+		<result property="id" column="id" />
+		<result property="outTradeNo" column="out_trade_no" />
+		<result property="createTime" column="create_time" />
+		<result property="payerOpenid" column="payer_openid" />
+		<result property="receiverOpenid" column="receiver_openid" />
+		<result property="picUrl" column="pic_url" />
+		<result property="info" column="info" />
+		<result property="price" column="price" />
+		<result property="deliverPlace" column="deliver_place" />
+		<result property="deliverTime" column="deliver_time" />
+		<result property="deliverType" column="deliver_type" />
+		<result property="type" column="type" />
+		<result property="status" column="status" />
+	</resultMap>
+	
+	<!-- 公共查询sql片段 -->
+	<sql id="select_sql">
+		select * 
+		from orders 
+	</sql>
+	
+	<!-- 查 - 根据id -->
+	<select id="getById" resultMap="model">
+		<include refid="select_sql"></include>
+		where id = #{id}
+	</select>
+	
+	<!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
+	<select id="getList" resultMap="model">
+		<include refid="select_sql"></include>
+		<where>
+			<if test=' this.has("id") '> and id = #{id} </if>
+			<if test=' this.has("outTradeNo") '> and out_trade_no = #{outTradeNo} </if>
+			<if test=' this.has("payerOpenid") '> and payer_openid = #{payerOpenid} </if>
+			<if test=' this.has("receiverOpenid") '> and receiver_openid = #{receiverOpenid} </if>
+			<if test=' this.has("info") '> and info = #{info} </if>
+			<if test=' this.has("price") '> and price = #{price} </if>
+			<if test=' this.has("deliverPlace") '> and deliver_place = #{deliverPlace} </if>
+			<if test=' this.has("deliverType") '> and deliver_type = #{deliverType} </if>
+			<if test=' this.has("type") '> and type = #{type} </if>
+			<if test=' this.has("status") '> and status = #{status} </if>
+		</where>
+		order by
+		<choose>
+			<when test='sortType == 1'> id desc </when>
+			<when test='sortType == 2'> out_trade_no desc </when>
+			<when test='sortType == 3'> create_time desc </when>
+			<when test='sortType == 4'> payer_openid desc </when>
+			<when test='sortType == 5'> receiver_openid desc </when>
+			<when test='sortType == 6'> info desc </when>
+			<when test='sortType == 7'> price desc </when>
+			<when test='sortType == 8'> deliver_place desc </when>
+			<when test='sortType == 9'> deliver_time desc </when>
+			<when test='sortType == 10'> deliver_type desc </when>
+			<when test='sortType == 11'> type desc </when>
+			<when test='sortType == 12'> status desc </when>
+			<otherwise> id desc </otherwise>
+		</choose>
+	</select>
+    <select id="cnt" resultType="com.pj.project.orders.OrderCnt">
+		SELECT `status` AS orderStatus,SUM(price) AS priceSum,COUNT(*) AS cnt
+		FROM orders
+		GROUP BY `status`
+	</select>
+
+
+</mapper>

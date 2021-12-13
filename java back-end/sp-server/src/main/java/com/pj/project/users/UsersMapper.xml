@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pj.project.users.UsersMapper">
+
+    <!-- 增 [G] -->
+    <insert id="add">
+        insert into users (id, avatar_url, openid, is_student, pic_url, name, sid, place, phone, review_status)
+        values (#{id}, #{avatarUrl}, #{openid}, #{isStudent}, #{picUrl}, #{name}, #{sid}, #{place}, #{phone},
+                #{reviewStatus})
+    </insert>
+
+    <!-- 删 -->
+    <delete id="delete">
+        delete
+        from users
+        where id = #{id}
+    </delete>
+
+    <!-- 改 [G] -->
+    <update id="update">
+        update users
+        set id            = #{id},
+            avatar_url    = #{avatarUrl},
+            openid        = #{openid},
+            is_student    = #{isStudent},
+            pic_url       = #{picUrl},
+            name          = #{name},
+            sid           = #{sid},
+            place         = #{place},
+            phone         = #{phone},
+            review_status = #{reviewStatus}
+        where id = #{id}
+    </update>
+
+
+    <!-- ================================== 查询相关 ================================== -->
+    <!-- select id, openid, is_student, pic_url, name, sid, place, phone from users  -->
+
+    <!-- 通用映射：手动模式 -->
+    <resultMap id="model" type="com.pj.project.users.Users">
+        <result property="id" column="id" />
+        <result property="avatarUrl" column="avatar_url" />
+        <result property="openid" column="openid" />
+        <result property="isStudent" column="is_student" />
+        <result property="picUrl" column="pic_url" />
+        <result property="name" column="name" />
+        <result property="sid" column="sid" />
+        <result property="place" column="place" />
+        <result property="phone" column="phone" />
+        <result property="reviewStatus" column="review_status" />
+    </resultMap>
+
+    <!-- 公共查询sql片段 -->
+    <sql id="select_sql">
+        select *
+        from users
+    </sql>
+
+    <!-- 查 - 根据id -->
+    <select id="getById" resultMap="model">
+        <include refid="select_sql"></include>
+        where id = #{id}
+    </select>
+
+    <!-- 查集合 - 根据条件（参数为空时代表忽略指定条件） [G] -->
+    <select id="getList" resultMap="model">
+        <include refid="select_sql"></include>
+        <where>
+            <if test=' this.has("id") '> and id = #{id} </if>
+            <if test=' this.has("openid") '> and openid = #{openid} </if>
+            <if test=' this.has("isStudent") '> and is_student = #{isStudent} </if>
+            <if test=' this.has("name") '> and name = #{name} </if>
+            <if test=' this.has("sid") '> and sid = #{sid} </if>
+            <if test=' this.has("place") '> and place = #{place} </if>
+            <if test=' this.has("phone") '> and phone = #{phone} </if>
+            <if test=' this.has("reviewStatus") '> and review_status = #{reviewStatus} </if>
+        </where>
+        order by
+        <choose>
+            <when test='sortType == 1'> id desc </when>
+            <when test='sortType == 2'> openid desc </when>
+            <when test='sortType == 3'> is_student desc </when>
+            <when test='sortType == 4'> name desc </when>
+            <when test='sortType == 5'> sid desc </when>
+            <when test='sortType == 6'> place desc </when>
+            <when test='sortType == 7'> phone desc </when>
+            <when test='sortType == 8'> review_status desc </when>
+            <otherwise> id desc </otherwise>
+        </choose>
+    </select>
+
+    <select id="cnt" resultType="com.pj.project.users.UserCnt">
+        SELECT is_student AS isStudent, COUNT(*) AS cnt
+        FROM users
+        GROUP BY is_student
+    </select>
+
+
+</mapper>
