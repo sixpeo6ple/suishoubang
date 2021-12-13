@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyy.mapper.OrdersMapper">
+    <update id="updatePicUrl">
+        UPDATE orders
+        SET pic_url="https://wxapp-1303032424.cos.ap-shanghai.myqcloud.com/SUFE/ExpressCode/picOutOfDate.jpg"
+        WHERE create_time &lt; NOW()-INTERVAL 15 MINUTE and pic_url!="https://wxapp-1303032424.cos.ap-shanghai.myqcloud.com/SUFE/ExpressCode/picOutOfDate.jpg";
+    </update>
+
+    <update id="updateStatus">
+        UPDATE orders
+        SET `status`=3
+        WHERE `status`=2 AND deliver_time &lt; NOW()-INTERVAL 1 DAY;
+    </update>
+
+    <select id="listAllOrders" resultType="com.xyy.entity.OrderUser">
+        SELECT orders.id,out_trade_no,create_time,orders.pic_url,info,price,TYPE,STATUS,deliver_time,deliver_type,deliver_place,
+               users.`name` AS payerName,users.sid AS payerSid,users.place AS payerPlace,users.phone AS payerPhone,users.avatar_url AS payerAvatarUrl,
+               tmp.`name` AS receiverName,tmp.sid AS receiverSid,tmp.place AS receiverPlace,tmp.phone AS receiverPhone,tmp.avatar_url AS receiverAvatarUrl
+        FROM orders
+                 LEFT JOIN users ON orders.`payer_openid` = users.`openid`
+                 LEFT JOIN users AS tmp ON orders.`receiver_openid` = tmp.`openid`
+        <where>
+            <if test="status != 0">
+                and status=#{status}
+            </if>
+            <if test="type!=null and type != ''">
+                and type=#{type}
+            </if>
+            <if test="id != -1">
+                and orders.id=#{id}
+            </if>
+            <if test="payerOpenid != null and payerOpenid!=''">
+                and orders.`payer_openid`=#{payerOpenid}
+            </if>
+            <if test="receiverOpenid != null and receiverOpenid!=''">
+                and orders.`receiver_openid`=#{receiverOpenid}
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
+
+    <select id="listAllOrdersWithPage" resultType="com.xyy.entity.OrderUser">
+        SELECT orders.id,out_trade_no,create_time,orders.pic_url,info,price,TYPE,STATUS,deliver_time,deliver_type,deliver_place,
+               users.`name` AS payerName,users.sid AS payerSid,users.place AS payerPlace,users.phone AS payerPhone,users.avatar_url AS payerAvatarUrl,
+               tmp.`name` AS receiverName,tmp.sid AS receiverSid,tmp.place AS receiverPlace,tmp.phone AS receiverPhone,tmp.avatar_url AS receiverAvatarUrl
+        FROM orders
+               LEFT JOIN users ON orders.`payer_openid` = users.`openid`
+               LEFT JOIN users AS tmp ON orders.`receiver_openid` = tmp.`openid`
+        <where>
+            <if test="status != 0">
+                and status=#{status}
+            </if>
+            <if test="type!=null and type != ''">
+                and type=#{type}
+            </if>
+            <if test="id != -1">
+                and orders.id=#{id}
+            </if>
+            <if test="payerOpenid != null and payerOpenid!=''">
+                and orders.`payer_openid`=#{payerOpenid}
+            </if>
+            <if test="receiverOpenid != null and receiverOpenid!=''">
+                and orders.`receiver_openid`=#{receiverOpenid}
+            </if>
+        </where>
+        ORDER BY id DESC
+    </select>
+</mapper>
