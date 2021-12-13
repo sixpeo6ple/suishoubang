@@ -1,0 +1,37 @@
+
+page{
+	background-color: rgb(219,228,229);
+}
+.title{
+	margin-top: 20px;
+	margin-left: 10px;
+}
+.uni-input{
+	border: solid #555555;
+	border-width: 0px 0px 1px 0px;
+	height: 45px;
+	margin-top: 5px;
+	margin-left: 3px;
+	margin-right: 3px;
+	padding-left: 10px;
+}
+.img{
+	height: 20px;
+	width: 20px;
+	margin: auto;
+}
+.img_box{
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+}
+.img{
+	height: 30px;
+	width: 30px;
+}
+.but{
+	background-color: rgb(246,237,218);
+	border-radius: 5px;
+	margin: 10px;
+}
+

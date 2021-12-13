@@ -1,0 +1,126 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "所有订单",
+				"enablePullDownRefresh":true
+			}
+		},
+		{
+			"path": "pages/eachorder/eachorder",
+			"style": {
+				"navigationBarTitleText": "订单详情" 
+			}
+		},
+		{
+			"path":"pages/message/message",
+			"style":{
+				"navigationBarTitleText":"历史订单"
+			}
+		},
+		{
+			"path":"pages/myorder/myorder",
+			"style":{
+				"navigationBarTitleText":"我的订单"
+			}
+		},
+		{
+			"path":"pages/myreceived/myreceived",
+			"style":{
+				"navigationBarTitleText":"我的接单"
+			}
+		},
+		{
+			"path":"pages/add/add",
+			"style":{
+				"navigationBarTitleText":"创建订单"
+			}
+		},
+		
+		{
+			"path":"pages/mine/mine",
+			"style":{
+				"navigationBarTitleText":"我的",
+				"enablePullDownRefresh":true
+			}
+		},
+		{
+			"path":"pages/exh/exh",
+			"style":{
+				"navigationBarTitleText":""
+			}
+		},
+		
+		{
+			"path":"pages/expressage/expressage",
+			"style":{
+				"navigationBarTitleText":"快递代取"
+			}
+			
+		},
+		
+		{
+			"path":"pages/stuinfo/stuinfo",
+			"style":{
+				"navigationBarTitleText":"学生信息认证"
+			}
+		},
+		
+		{
+			"path":"pages/takeoutFood/releaseFood",
+			"style":{
+				"navigationBarTitleText":"外卖代取"
+			}
+		},
+		
+		{
+			"path":"pages/myorder/myFood",
+			"style":{
+				"navigationBarTitleText":""
+			}
+		},
+		
+		{
+			"path":"pages/myreceived/myrecFood",
+			"style":{
+				"navigationBarTitleText":""
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#ffffff"
+	},
+	"tabBar":{
+		"list":[
+			{
+				"text":"所有订单",
+				"pagePath":"pages/index/index",
+				"iconPath":"static/index.png",
+				"selectedIconPath":"static/index_click.png"
+			},
+			{
+				"text":"创建订单",
+				"pagePath":"pages/add/add",
+				"iconPath":"static/add.png",
+				"selectedIconPath":"static/add_click.png"
+			},
+			{
+				"text":"历史订单",
+				"pagePath":"pages/message/message",
+				"iconPath":"static/message.png",
+				"selectedIconPath":"static/message_click.png"
+			},
+			{
+				"text":"我的",
+				"pagePath":"pages/mine/mine",
+				"iconPath":"static/mine.png",
+				"selectedIconPath":"static/mine_click.png"
+			}
+		]
+	}
+
+}

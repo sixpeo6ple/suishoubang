@@ -1,0 +1,40 @@
+
+page{
+	background-color: rgb(228, 236, 241);
+}
+.comb{
+	display: flex;
+	flex-direction: column;
+}
+.title{
+	display: block;
+	color: rgb(66, 66, 41);
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 10px;
+	border-radius: 13px;
+	width: 100px;
+	background-color: rgb(246,237,218);
+	border: 3px solid rgb(219,229,228);
+}
+.value{
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-left: 20px;
+	text-align: right;
+	border: solid rgb(196, 196, 120);
+	border-width: 0px 0px 1px 0px;
+	padding-right: 10px;
+	font-size: 15px;
+}
+.pic{
+	text-align: center;
+}
+.img{
+	width: 40px;
+	height: 40px;
+}
+.img2{
+	height: 60px;
+}
+

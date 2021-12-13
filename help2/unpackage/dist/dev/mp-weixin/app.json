@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/eachorder/eachorder",
+    "pages/message/message",
+    "pages/myorder/myorder",
+    "pages/myreceived/myreceived",
+    "pages/add/add",
+    "pages/mine/mine",
+    "pages/exh/exh",
+    "pages/expressage/expressage",
+    "pages/stuinfo/stuinfo",
+    "pages/takeoutFood/releaseFood",
+    "pages/myorder/myFood",
+    "pages/myreceived/myrecFood"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "所有订单",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/index.png",
+        "selectedIconPath": "static/index_click.png"
+      },
+      {
+        "text": "创建订单",
+        "pagePath": "pages/add/add",
+        "iconPath": "static/add.png",
+        "selectedIconPath": "static/add_click.png"
+      },
+      {
+        "text": "历史订单",
+        "pagePath": "pages/message/message",
+        "iconPath": "static/message.png",
+        "selectedIconPath": "static/message_click.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/mine_click.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,43 @@
+
+page{
+	height: 100%;
+}
+.content{
+	height: 100%;
+}
+.blank1{
+	height: 100px;
+}
+.blank2{
+	height: 30px;
+}
+.photo{
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	height: 50px;
+	width: 50px;
+}
+.name{
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+.but{
+	display: block;
+	margin-top: 20px;
+	border-radius: 13px;
+	width: 100px;
+	background-color: rgb(246,237,218);
+	border: 3px solid rgb(219,229,228);
+}
+.stu_card{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+.text{
+	margin-top: 5px;
+}
+
